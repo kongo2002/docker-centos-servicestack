@@ -29,7 +29,7 @@ namespace monotest
     {
         public static void Main (string[] args)
         {
-            Console.WriteLine ("Starting test deamon...");
+            Console.WriteLine ("Starting monotest service");
 
             // configure JSON serializer
             JsConfig.EmitCamelCaseNames = true;
@@ -56,6 +56,8 @@ namespace monotest
                         exit = true;
                 }
             }
+
+            Console.WriteLine("Terminating monotest service");
         }
     }
 }
