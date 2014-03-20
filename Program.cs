@@ -7,6 +7,7 @@ using Mono.Unix.Native;
 using Funq;
 
 using ServiceStack;
+using ServiceStack.Text;
 
 namespace monotest
 {
@@ -17,7 +18,11 @@ namespace monotest
         { }
 
         public override void Configure (Container container)
-        { }
+        {
+            SetConfig(new HostConfig {
+                DefaultContentType = MimeTypes.Json
+            });
+        }
     }
 
     class MonoTest
@@ -25,6 +30,9 @@ namespace monotest
         public static void Main (string[] args)
         {
             Console.WriteLine ("Starting test deamon...");
+
+            // configure JSON serializer
+            JsConfig.EmitCamelCaseNames = true;
 
             var exit = false;
             var signals = new[] {
