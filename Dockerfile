@@ -23,4 +23,24 @@ RUN wget -q "http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noar
     rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm && \
     rm *.rpm
 
-RUN yum install -y supervisor
+RUN yum install -y supervisor git
+
+ADD ./supervisord.conf /etc/supervisord.conf
+ADD ./mono.conf /etc/ld.so.conf.d/mono.conf
+ADD ./git.tar.gz /git.tar.gz
+
+RUN cd git.tar.gz && \
+    git reset --hard HEAD && \
+    git submodule update --init && \
+    cd monotest && \
+    xbuild monotest.csproj && \
+    cp -r bin/Debug /build && \
+    cd / && \
+    rm -rf git.tar.gz
+
+RUN chown root:root /etc/ld.so.conf.d/mono.conf && \
+    chown root:root /etc/supervisord.conf && \
+    ldconfig
+
+EXPOSE 8080
+CMD ["/usr/bin/supervisord"]
