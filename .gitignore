@@ -1,4 +1,5 @@
 *.tar.gz
 *.userprefs
+.image_built
 bin
 obj
