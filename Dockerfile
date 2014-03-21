@@ -1,4 +1,4 @@
-# ServiceStack running on mono
+# Examplary ServiceStack running on mono
 #
 # VERSION 0.0.1
 
@@ -29,6 +29,11 @@ ADD ./supervisord.conf /etc/supervisord.conf
 ADD ./mono.conf /etc/ld.so.conf.d/mono.conf
 ADD ./git.tar.gz /git.tar.gz
 
+# transfer remaining repository contents
+# into the container and build the executable
+#
+# TODO: this could be a separate git repository
+# or even more likely prebuilt binaries instead
 RUN cd git.tar.gz && \
     git reset --hard HEAD && \
     git submodule update --init && \
