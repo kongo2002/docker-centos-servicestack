@@ -1,3 +1,5 @@
+# docker-centos-servicestack
+
 This repository contains an examplary C# [ServiceStack][servicestack] project
 running on [mono][mono] that can be easily deployed into a CentOS docker image.
 
@@ -25,8 +27,8 @@ $ make run
 ### Run interactively
 
 In order to see the output of the running [supervisord][supervisord] you can
-start the docker image with an interactive shell (basically invoking `docker`
-with `-t -i`):
+start the docker image with an interactive shell - basically invoking `docker`
+with `-t -i --rm`
 
 ``` bash
 $ make interactive
@@ -41,12 +43,14 @@ port that is forwarded by docker:
 ``` bash
 # look for the exposed port 8080 of your docker container
 $ docker ps
+CONTAINER ID   IMAGE                                  COMMAND                PORTS
+678a549e3499   kongo2002/centos-servicestack:latest   /usr/bin/supervisord   0.0.0.0:49154->8080/tcp
 
-# here the port was forwarded to 49187
-$ curl localhost:49187/ping
+# here the port was forwarded to 49154
+$ curl localhost:49154/ping
 {"data":"pong","success":true}
 
-$ curl localhost:49187/echo/foo
+$ curl localhost:49154/echo/foo
 {"data":"foo","success":true}
 ```
 
