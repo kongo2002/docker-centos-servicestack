@@ -9,7 +9,7 @@ docker: git.tar.gz Dockerfile
 	fi
 
 run: docker
-	docker run -P kongo2002/centos-servicestack
+	docker run -P -d kongo2002/centos-servicestack
 
 interactive: docker
 	docker run -i -t -P --rm kongo2002/centos-servicestack
