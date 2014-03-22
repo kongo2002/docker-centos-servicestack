@@ -8,7 +8,7 @@ namespace monotest.Services
 {
     public class PingService : Service
     {
-        public object Any(PingRequest request)
+        public object Any(Routes.PingRequest request)
         {
             return new Response<string>("pong");
         }
