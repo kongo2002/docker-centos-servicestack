@@ -4,7 +4,7 @@ git.tar.gz:
 	tar czf git.tar.gz .git
 
 docker: git.tar.gz Dockerfile
-	if [ ! -e ".image_built" ]; then \
+	@if [ ! -e ".image_built" ]; then \
 	    docker build -t kongo2002/centos-servicestack . && touch .image_built; \
 	fi
 
